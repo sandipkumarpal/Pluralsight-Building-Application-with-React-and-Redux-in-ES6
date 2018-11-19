@@ -1,0 +1,7 @@
+nav {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+nav .active {
+  color: #ffa700;
+}
