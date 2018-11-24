@@ -7,11 +7,13 @@ import { Provider } from 'react-redux';
 import routes from './routes';
 
 import configureStore from './store/configureStore';
+import { loadService } from './actions/serviceAction';
 
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './styles/styles.css';
 
 const store = configureStore();
+store.dispatch(loadService());
 
 render (
   <Provider store={store}>

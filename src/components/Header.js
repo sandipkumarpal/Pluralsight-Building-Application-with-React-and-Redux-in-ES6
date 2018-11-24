@@ -9,6 +9,8 @@ function Header() {
       <Link to="/about" activeClassName="active">About</Link>
       {" | "}
       <Link to="/courses" activeClassName="active">Courses</Link>
+      {" | "}
+      <Link to="/services" activeClassName="active">Services</Link>
     </nav>
   );
 }
