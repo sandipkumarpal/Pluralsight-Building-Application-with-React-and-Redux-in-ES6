@@ -8,12 +8,14 @@ import routes from './routes';
 
 import configureStore from './store/configureStore';
 import { loadService } from './actions/serviceAction';
+import { loadAuthors } from './actions/authorAction';
 
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './styles/styles.css';
 
 const store = configureStore();
 store.dispatch(loadService());
+store.dispatch(loadAuthors());
 
 render (
   <Provider store={store}>
