@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as serviceActions from '../../actions/serviceAction';
-
+import toster from 'toastr';
 import ServiceForm from './ServiceForm';
 
 class ManageServicePage extends React.Component {
@@ -12,7 +12,8 @@ class ManageServicePage extends React.Component {
 
     this.state = {
       course: Object.assign({}, props.course),
-      errors: {}
+      errors: {},
+      saving: false
     };
     this.updateServiceState = this.updateServiceState.bind(this);
     this.saveService = this.saveService.bind(this);
@@ -37,7 +38,18 @@ class ManageServicePage extends React.Component {
 
   saveService(event){
     event.preventDefault();
-    this.props.actions.saveService(this.state.course);
+    this.setState({ saving: true });
+    this.props.actions.saveService(this.state.course)
+      .then(() => this.redirect())
+      .catch(error => {
+        this.setState({ saving: false });
+        toster.error(error);
+      });
+  }
+
+  redirect() {
+    this.setState({ saving: false });
+    toster.success('Service saved');
     this.props.history.push('/services');
   }
 
@@ -50,6 +62,7 @@ class ManageServicePage extends React.Component {
           onSave={this.saveService}
           course={this.state.course}
           errors={this.state.errors}
+          loading={this.state.saving}
         />
       </div>
     );
